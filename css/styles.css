@@ -1,0 +1,88 @@
+html, body{
+    margin: 0;
+    background: #fff;
+    font-size: 20px;
+    line-height: 1.4;
+    font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page-wrapper {
+  overflow: hidden;
+  max-width: 100%;
+  position: relative;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.subscribe-form {
+  margin: 3rem 0;
+}
+
+.subscribe-form .input-container {
+  display: flex;
+}
+
+.subscribe-form .input-holder {
+  position: relative;
+}
+
+.subscribe-form .validation-message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: red;
+  color: #fff;
+  font-size: 12px;
+  padding: .25em .5em;
+  text-align: center;
+  opacity: 0;
+  transform-origin: center top;
+  transform: rotateX(-90deg);
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.subscribe-form.error .validation-message {
+  opacity: 1;
+  transform: rotateX(0);
+}
+
+.subscribe-form input[type="email"] {
+  padding: 0.7em 1em;
+  border: 0;
+  border-bottom: 2px solid navy;
+  font-size: inherit;
+  transition: border-color .3s ease-out;
+}
+
+.subscribe-form input[type="email"]:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.btn {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.7em 2.5em;
+  margin: 0 1em;
+  background-color: navy;
+  border: 1px solid navy;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  font-size: inherit;
+  cursor: pointer;
+  transition: background-color .3s ease-out;
+}
+
+.btn:hover {
+  background-color: blue;
+}
