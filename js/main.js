@@ -2,8 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 	let form = document.querySelector('.subscribe-form');
 	let input = form.querySelector('input[type="email"]');
-	let btn = form.querySelector('.btn');
-	let regExp = /^[a-z]+[a-z0-9_\.-]*\@\w+\.[a-z]{2,8}$/i;
+	let regExp = /^[a-z]+[a-z0-9_\.-]*@\w+\.[a-z]{2,8}$/i;
 
 	form.setAttribute('novalidate', 'novalidate');
 
@@ -23,21 +22,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	function showThankYouMessage() {
 		let message = document.createElement('div');
-		message.classListList.add('thank-message');
+		message.classList.add('thank-message');
 		message.innerHTML = 'Thank you!';
 		form.appendChild(message);
 	};
 
 	function sendForm() {
 		let data = new FormData();
-		data.append('value', input.value);
-		let request = fetch('url', {
-			method: 'post',
-			body: data.get('value')
-		})
-		.then((response) => response.ok)
-		.then(() => {
-			console.log(response);
-		});
+		data.append('email', input.value);
+        let request = new XMLHttpRequest();
+        try {
+			request.open('POST', 'http://sereda.in.ua/mail.php');
+			request.send(data);
+			request.onload = function() {
+				if(request.status === 200 && request.readyState === 4) {
+					showThankYouMessage();
+				}
+			};
+        }
+        catch(error) {
+			form.classList.add('error');
+			form.querySelector('.validation-message').innerHTML = error.message;
+		}
 	};
 });
