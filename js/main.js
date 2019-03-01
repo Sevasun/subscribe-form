@@ -25,24 +25,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		message.classList.add('thank-message');
 		message.innerHTML = 'Thank you!';
 		form.appendChild(message);
+		form.classList.add('success');
 	};
+
+	function clearForm() {
+		input.value = "";
+		return input.value;
+	}
 
 	function sendForm() {
 		let data = new FormData();
 		data.append('email', input.value);
-        let request = new XMLHttpRequest();
-        try {
-			request.open('POST', 'http://sereda.in.ua/mail.php');
-			request.send(data);
-			request.onload = function() {
-				if(request.status === 200 && request.readyState === 4) {
-					showThankYouMessage();
-				}
-			};
-        }
-        catch(error) {
-			form.classList.add('error');
-			form.querySelector('.validation-message').innerHTML = error.message;
-		}
+		let request = fetch('http://sereda.in.ua/mail.php', {
+			method: 'POST',
+			body: data
+		})
+		.then(() => clearForm())
+		.then(() => showThankYouMessage())
+		.catch((error) => console.log(error));
 	};
 });

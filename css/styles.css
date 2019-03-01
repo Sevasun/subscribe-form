@@ -22,11 +22,40 @@ html, body{
 }
 
 .subscribe-form {
-  margin: 3rem 0;
+  margin: 3rem auto;
+  position: relative;
+  width: 500px;
+}
+
+.thank-message {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: opacity .3s ease;
+}
+
+.subscribe-form.success .input-container {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.subscribe-form.success .thank-message {
+  opacity: 1;
+  z-index: 2;
 }
 
 .subscribe-form .input-container {
   display: flex;
+  flex: 1;
+  transition: opacity .3s ease;
 }
 
 .subscribe-form .input-holder {
